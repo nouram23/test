@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+.isoLogoWrapper {
+    height: 70px;
+    background: rgba(2, 1, 1, 0.937);
+    margin: 0;
+    padding: 0 10px;
+    text-align: center;
+    overflow: hidden;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    -ms-transition: 0;
+    -o-border-radius: 0;
+    border-radius: 0;
+    
+  }
+  .isoLogoWrapper h3 a {
+  
+        font-size: 21px;
+        font-weight: 300;
+        line-height: 70px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        /* color: ${palette('grayscale', 6)}; */
+        display: block;
+        text-decoration: none;
+    
+  }
