@@ -41,7 +41,7 @@ export default function HomeLayout({
   const items: MenuProps['items'] = [
     getItem(<Link href={'/reg'}>Бүртгэх</Link>, 'reg', <MailOutlined />, null),
     getItem(<Link href={'/shipment'}>Ачилт</Link>, 'as', <MailOutlined />, null),
-    getItem(<Link href={'/recieve'}>Хүлээн авсан</Link>, 'rec', <MailOutlined />, null),
+    getItem(<Link href={'/arrival'}>Хүлээн авсан</Link>, 'rec', <MailOutlined />, null),
   ];
   
   return (

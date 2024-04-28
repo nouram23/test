@@ -11,7 +11,7 @@ import dayjs from "dayjs";
 
 
 
-const Reg: NextPage = () => {
+const Arrival: NextPage = () => {
 
     const [open, setOpen] = useState(false);
     const [data, setData] = useState([]);
@@ -68,10 +68,37 @@ const columns  = [
         <div>{createdDate != 0 && dayjs.unix(createdDate).format('YYYY-MM-DD HH:mm:ss')}</div>
       ),
   },
-];
+  {
+    title: 'Action',
+    key: 'action',
+    render: (totalBooked, record) => (
+        <Button onClick={() => OnUpdate(record)} type="default">
+          Update
+        </Button>
+      ),
 
-const OnUpdate = () =>{
+  },
+];
+function isValidTimestamp(timestamp) {
+    // Check if the timestamp is within a reasonable range
+    const minTimestamp = 0; // Minimum Unix timestamp (Unix epoch)
+    const maxTimestamp = Date.now() / 1000; // Current Unix timestamp (in seconds)
+    
+    if (timestamp < minTimestamp || timestamp > maxTimestamp) {
+      return false; // Timestamp is out of range
+    }
+    
+    // Convert timestamp to date
+    const date = new Date(timestamp * 1000); // Convert seconds to milliseconds
+    
+    // Check if the resulting date is valid
+    return !isNaN(date.getTime()); // Check if date.getTime() returns a valid timestamp
+  }
+  
+const OnUpdate = (record) =>{
         setOpen(true)
+        setRow(record)
+        console.log(record)
 }
 
 const onChange = (date, dateString) => {
@@ -83,15 +110,12 @@ const onChange = (date, dateString) => {
         id:row["id"],
         deliveryDate: dayjs(date).unix() }
         console.log(data)
-    axios.post('http://172.20.10.2:3003/addDeliveryDate',data).then(res=>{
+    axios.post('http://172.20.10.2:3003/addArrivalDate',data).then(res=>{
         console.log(res.data)
     }).catch(e=>console.log(e))
   }
   return (
     <HomeLayout>
-             <Button onClick={() => OnUpdate()} type="default">
-          Add
-        </Button>
     <Table columns={columns} dataSource={data} pagination={{ size: "small", position: ["bottomCenter"] }}/>
     <Modal
         open={open}
@@ -110,4 +134,4 @@ const onChange = (date, dateString) => {
   );
 };
 
-export default Reg;
+export default Arrival;
