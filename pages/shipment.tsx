@@ -112,6 +112,7 @@ const onChange = (date, dateString) => {
         console.log(data)
     axios.post('http://172.20.10.2:3003/addDeliveryDate',data).then(res=>{
         console.log(res.data)
+        setOpen(false)
     }).catch(e=>console.log(e))
   }
   return (
