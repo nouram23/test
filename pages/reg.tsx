@@ -100,9 +100,9 @@ const OnUpdate = () =>{
         onCancel={() => setOpen(false)}
         footer={null}
       >
-   <Row className="flex"> <Input value={barcode} onChange={e=>setBarcode(e.target.value)} />
+   <Row className="flex"> <Input placeholder="Barcode" value={barcode} onChange={e=>setBarcode(e.target.value)} />
     </Row>
-          <Row className="flex"> <Input value={man} onChange={e=>setMan(e.target.value)} />
+          <Row className="flex mt-3"> <Input placeholder="Manufacturer name" value={man} onChange={e=>setMan(e.target.value)} />
     </Row>
         <Row className="mt-3"><Button onClick={()=>{save()}}>Save</Button></Row>
       </Modal>
