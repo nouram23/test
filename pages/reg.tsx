@@ -5,7 +5,7 @@ import HomeLayout from "../components/Layout";
 
 import { NextPage } from "next";
 import axios from "axios";
-import { Button, DatePicker, Modal, Row, Space, Table, Tag } from 'antd';
+import { Button, DatePicker, Modal, Row, Space, Table, Tag , Input} from 'antd';
 import type { TableProps } from 'antd';
 import dayjs from "dayjs";
 
@@ -15,8 +15,8 @@ const Reg: NextPage = () => {
 
     const [open, setOpen] = useState(false);
     const [data, setData] = useState([]);
-    const [date, setDate] = useState(null);
-    const [row, setRow] = useState(null);
+    const [barcode, setBarcode] = useState(null);
+    const [man, setMan] = useState(null);
 useEffect(()=>{
     getItems()
 },[])
@@ -74,17 +74,16 @@ const OnUpdate = () =>{
         setOpen(true)
 }
 
-const onChange = (date, dateString) => {
-    console.log(date, dateString);
-    setDate(date)
-  };
   const save =()=>{
     const data= {
-        id:row["id"],
-        deliveryDate: dayjs(date).unix() }
+        barcode,
+        manufacturerName: man
+    }
         console.log(data)
-    axios.post('http://172.20.10.2:3003/addDeliveryDate',data).then(res=>{
+    axios.post('http://172.20.10.2:3003/registerProduct',data).then(res=>{
         console.log(res.data)
+        getItems();
+        setOpen(false);
     }).catch(e=>console.log(e))
   }
   return (
@@ -95,15 +94,17 @@ const onChange = (date, dateString) => {
     <Table columns={columns} dataSource={data} pagination={{ size: "small", position: ["bottomCenter"] }}/>
     <Modal
         open={open}
-        title="Update"
+        title="Create"
         closable
         width={400}
         onCancel={() => setOpen(false)}
         footer={null}
       >
-   <Row className="flex"> <DatePicker onChange={onChange} />
+   <Row className="flex"> <Input value={barcode} onChange={e=>setBarcode(e)} />
     </Row>
-    <Row className="mt-3"><Button onClick={()=>{save()}}>Save</Button></Row>
+          <Row className="flex"> <Input value={man} onChange={e=>setMan(e)} />
+    </Row>
+        <Row className="mt-3"><Button onClick={()=>{save()}}>Save</Button></Row>
       </Modal>
 
     </HomeLayout>
