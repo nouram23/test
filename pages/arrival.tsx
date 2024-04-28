@@ -107,7 +107,7 @@ const onChange = (date, dateString) => {
   };
   const save =()=>{
     const data= {
-        id:row["id"],
+        id:Number(row["id"]),
         deliveryDate: dayjs(date).unix() }
         console.log(data)
     axios.post('http://172.20.10.2:3003/addArrivalDate',data).then(res=>{
